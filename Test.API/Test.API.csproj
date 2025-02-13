@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GenericRepository.Library\GenericRepository.Library.csproj" />
+    <ProjectReference Include="..\Results.Library\Results.Library.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,32 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>CD.Results</PackageId>
+    <Authors>Alparslan Akbas</Authors>
+    <Company>Codeland</Company>
+    <Description>A lightweight and flexible Result pattern implementation for .NET applications. Simplifies API response handling and error management.</Description>
+    <PackageProjectUrl>https://alparslanakbas.github.io/</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/alparslanakbas/CD.GenericRepository/tree/main/Results.Library</RepositoryUrl>
+    <PackageTags>EntityFramework;EntityFrameworkCore;Dotnet9;Result;ResultPattern</PackageTags>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

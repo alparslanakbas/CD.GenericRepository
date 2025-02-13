@@ -1,6 +1,6 @@
 ﻿using GenericRepository.Library;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Results.Library;
 
 namespace Test.API.Controllers
 {
@@ -32,7 +32,7 @@ namespace Test.API.Controllers
 
     public interface IUserService
     {
-        Task<User> GetByIdAsync(int id);
+        Task<Result<User>> GetByIdAsync(int id);
         void Add(User user);
     }
 
@@ -53,9 +53,10 @@ namespace Test.API.Controllers
             _unitOfWork.SaveChanges();
         }
 
-        public async Task<User> GetByIdAsync(int id)
-            => await _userRepository.GetByExpressionAsync(x => x.Id == id);
+        public async Task<Result<User>> GetByIdAsync(int id)
+            => await _userRepository.GetByExpressionAsync(x => x.Id == id)
+            ?? Result<User>.NotFound($"User not found with id: {id}");
 
-       
+
     }
 }

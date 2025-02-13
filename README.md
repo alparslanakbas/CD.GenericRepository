@@ -1,4 +1,4 @@
-# 2 Nugeget Package
+# 2 Nuget Package
 
 * Generic Repository Pattern implementation with Entity Framework Core
 * Result Pattern for standardized API responses
@@ -18,7 +18,7 @@ A generic repository pattern implementation that simplifies database operations.
 * Built-in Unit of Work pattern
 * Expression-based queries
 
-For Details, see [Generic Repository Package]("https://github.com/alparslanakbas/CD.GenericRepository/tree/main/GenericRepository.Library")
+For Details, see [Generic Repository Package](https://www.nuget.org/packages/CD.Generic.Repository)
 
 2. Results.Library
 
@@ -31,4 +31,4 @@ A Result pattern implementation for standardized API responses.
 * JSON serialization support
 * Common status helpers (NotFound, BadRequest, etc.)
 
-For Details, see [Result Package]("https://github.com/alparslanakbas/CD.GenericRepository/tree/main/Results.Library")
+For Details, see [Result Package](https://www.nuget.org/packages/CD.Results)

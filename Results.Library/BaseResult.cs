@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json.Serialization;
 
-namespace Results.Library
+namespace CD.Results
 {
     public abstract class BaseResult
     {

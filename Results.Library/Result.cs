@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace Results.Library
+namespace CD.Results
 {
     public sealed class Result<T> : BaseResult
     {

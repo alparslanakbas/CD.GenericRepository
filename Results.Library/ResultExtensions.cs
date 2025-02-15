@@ -1,5 +1,5 @@
 ﻿using System.Net;
-namespace Results.Library
+namespace CD.Results
 {
     public static class ResultExtensions
     {

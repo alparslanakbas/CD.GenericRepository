@@ -1,4 +1,4 @@
-﻿namespace GenericRepository.Library
+﻿namespace CD.GenericRepository
 {
     public interface IUnitOfWork
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace GenericRepository.Library
+namespace CD.GenericRepository
 {
     /// <summary>
     /// Provides a generic repository pattern implementation for entity operations.

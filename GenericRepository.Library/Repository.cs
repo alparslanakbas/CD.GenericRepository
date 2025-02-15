@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace GenericRepository.Library
+namespace CD.GenericRepository
 {
     public class Repository<TEntity, TContext> : IRepository<TEntity>
         where TEntity : class

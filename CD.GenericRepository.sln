@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericRepository.Library", "GenericRepository.Library\GenericRepository.Library.csproj", "{ACE054E8-4C2D-49E9-AC14-31E41D509EF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.GenericRepository", "src\CD.GenericRepository\CD.GenericRepository.csproj", "{ACE054E8-4C2D-49E9-AC14-31E41D509EF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.API", "Test.API\Test.API.csproj", "{5CF3C2AE-CA29-4D07-8555-7A3E5BDEDACC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.GenericRepository.Api", "samples\CD.GenericRepository.Api\CD.GenericRepository.Api.csproj", "{5CF3C2AE-CA29-4D07-8555-7A3E5BDEDACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Results.Library", "Results.Library\Results.Library.csproj", "{01BC7FF4-072F-4065-8C51-21ACAB16544B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.Results", "src\CD.Results\CD.Results.csproj", "{01BC7FF4-072F-4065-8C51-21ACAB16544B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.Generic.Repository", "src\CD.Generic.Repository\CD.Generic.Repository.csproj", "{5A5FE717-BF05-40C6-A289-6B493A81D720}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.GenericRepository.Tests", "tests\CD.GenericRepository.Tests\CD.GenericRepository.Tests.csproj", "{6CA55965-A5ED-4798-A978-F74085C3F102}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Çözüm Öğeleri", "Çözüm Öğeleri", "{E0C942DB-C584-4BE1-A48F-6B5716F6CAF8}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,6 +36,14 @@ Global
 		{01BC7FF4-072F-4065-8C51-21ACAB16544B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01BC7FF4-072F-4065-8C51-21ACAB16544B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01BC7FF4-072F-4065-8C51-21ACAB16544B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CA55965-A5ED-4798-A978-F74085C3F102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CA55965-A5ED-4798-A978-F74085C3F102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CA55965-A5ED-4798-A978-F74085C3F102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CA55965-A5ED-4798-A978-F74085C3F102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

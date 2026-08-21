@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <AssemblyName>CD.Results</AssemblyName>
+    <RootNamespace>CD.Results</RootNamespace>
+    <PackageId>CD.Results</PackageId>
+    <Version>3.0.0</Version>
+    <Description>A lightweight, dependency-free Result pattern for explicit success and failure handling in .NET applications.</Description>
+    <PackageTags>Result;ResultPattern;ErrorHandling;Functional;DotNet</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icon.png;LICENSE.txt;README.md" />
+    <None Include="icon.png" Pack="true" PackagePath="/" />
+    <None Include="LICENSE.txt" Pack="true" PackagePath="/" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+</Project>

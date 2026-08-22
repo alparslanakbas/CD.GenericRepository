@@ -37,3 +37,4 @@ All notable changes to this project are documented here.
 - Removing a missing entity no longer passes `null` to EF Core.
 - Duplicate predicates and ignored cancellation tokens in async queries.
 - Broken namespaces and dependency registration in the sample API.
+- Compatibility-package publishing no longer attempts to upload an empty symbol package.

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <AssemblyName>CD.Results.AspNetCore</AssemblyName>
+    <RootNamespace>CD.Results.AspNetCore</RootNamespace>
+    <PackageId>CD.Results.AspNetCore</PackageId>
+    <Version>3.0.0-preview.1</Version>
+    <Description>ASP.NET Core response mapping for the transport-independent CD.Results package.</Description>
+    <PackageTags>Result;ResultPattern;AspNetCore;MinimalApi;WebApi</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\CD.Results\CD.Results.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\CD.Results\icon.png" Link="icon.png" Pack="true" PackagePath="/" />
+    <None Include="..\CD.Results\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="/" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+</Project>

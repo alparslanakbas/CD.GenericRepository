@@ -12,3 +12,8 @@ Content-Type: application/json
 
 GET {{host}}/api/users/1
 Accept: application/json
+
+###
+
+GET {{host}}/api/users?page=1&pageSize=20
+Accept: application/json

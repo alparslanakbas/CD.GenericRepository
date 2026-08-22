@@ -26,7 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\CD.GenericRepository\CD.GenericRepository.csproj" />
+    <ProjectReference Include="..\..\src\CD.Results.AspNetCore\CD.Results.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

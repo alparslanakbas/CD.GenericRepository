@@ -25,6 +25,11 @@ public interface IRepository<TEntity> : IReadRepository<TEntity>
     Task<bool> RemoveByIdAsync<TKey>(TKey id, CancellationToken cancellationToken = default)
         where TKey : notnull;
 
+    /// <summary>Marks an entity with a single or composite primary key for deletion.</summary>
+    Task<bool> RemoveByKeyAsync(
+        IReadOnlyList<object> keyValues,
+        CancellationToken cancellationToken = default);
+
     Task<bool> RemoveFirstAsync(
         Expression<Func<TEntity, bool>> predicate,
         CancellationToken cancellationToken = default);

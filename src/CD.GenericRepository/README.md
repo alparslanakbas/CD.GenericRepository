@@ -5,19 +5,21 @@ Modern repository and unit-of-work APIs for Entity Framework Core. Installing th
 ## Install
 
 ```bash
-dotnet add package CD.GenericRepository
+dotnet add package CD.GenericRepository --prerelease
 ```
 
 ## Create a repository
 
 ```csharp
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options)
-    : DbContext(options), IUnitOfWork;
+    : DbContext(options);
 
 public interface IUserRepository : IRepository<User>;
 
 public sealed class UserRepository(AppDbContext context)
     : Repository<User, AppDbContext>(context), IUserRepository;
+
+builder.Services.AddGenericRepositories<AppDbContext>();
 ```
 
 ## Read data
@@ -36,6 +38,18 @@ IQueryable<User> query = repository.Query()
     .OrderBy(candidate => candidate.Name);
 ```
 
+Project only the required columns and return an ordered page:
+
+```csharp
+PagedList<UserSummary> page = await repository.PageAsync(
+    user => new UserSummary(user.Id, user.Name),
+    user => user.Name,
+    pageNumber: 1,
+    pageSize: 20,
+    predicate: user => user.IsActive,
+    cancellationToken: cancellationToken);
+```
+
 Queries are no-tracking by default. Pass `asTracking: true` when tracked entities are required.
 
 ## Write data
@@ -50,6 +64,18 @@ if (removed)
     await unitOfWork.SaveChangesAsync(cancellationToken);
 }
 ```
+
+## Transactions
+
+```csharp
+await transactionalUnitOfWork.ExecuteInTransactionAsync(async token =>
+{
+    await userRepository.AddAsync(user, token);
+    await auditRepository.AddAsync(auditEntry, token);
+});
+```
+
+Successful operations are saved and committed once. Exceptions roll the transaction back and remain visible to the caller.
 
 ## Target frameworks
 

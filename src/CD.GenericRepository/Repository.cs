@@ -45,6 +45,61 @@ public class Repository<TEntity> : IRepository<TEntity>
         return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task<IReadOnlyList<TResult>> ProjectAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(selector);
+        IQueryable<TEntity> query = Query();
+
+        if (predicate is not null)
+        {
+            query = query.Where(predicate);
+        }
+
+        return await query
+            .Select(selector)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<PagedList<TResult>> PageAsync<TResult, TOrderKey>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, TOrderKey>> orderBy,
+        int pageNumber,
+        int pageSize,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool descending = false,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(selector);
+        ArgumentNullException.ThrowIfNull(orderBy);
+        ArgumentOutOfRangeException.ThrowIfLessThan(pageNumber, 1);
+        ArgumentOutOfRangeException.ThrowIfLessThan(pageSize, 1);
+
+        IQueryable<TEntity> query = Query();
+
+        if (predicate is not null)
+        {
+            query = query.Where(predicate);
+        }
+
+        int totalCount = await query.CountAsync(cancellationToken).ConfigureAwait(false);
+        IOrderedQueryable<TEntity> orderedQuery = descending
+            ? query.OrderByDescending(orderBy)
+            : query.OrderBy(orderBy);
+
+        List<TResult> items = await orderedQuery
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(selector)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        return new PagedList<TResult>(items, pageNumber, pageSize, totalCount);
+    }
+
     public Task<bool> ExistsAsync(
         Expression<Func<TEntity, bool>> predicate,
         CancellationToken cancellationToken = default)
@@ -115,7 +170,22 @@ public class Repository<TEntity> : IRepository<TEntity>
         CancellationToken cancellationToken = default)
         where TKey : notnull
     {
-        TEntity? entity = await _entities.FindAsync([id], cancellationToken).ConfigureAwait(false);
+        return await RemoveByKeyAsync([id], cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<bool> RemoveByKeyAsync(
+        IReadOnlyList<object> keyValues,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(keyValues);
+
+        if (keyValues.Count == 0)
+        {
+            throw new ArgumentException("At least one key value is required.", nameof(keyValues));
+        }
+
+        object?[] keys = keyValues.Cast<object?>().ToArray();
+        TEntity? entity = await _entities.FindAsync(keys, cancellationToken).ConfigureAwait(false);
 
         if (entity is null)
         {

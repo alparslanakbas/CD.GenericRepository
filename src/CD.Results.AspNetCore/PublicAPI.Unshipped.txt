@@ -1,0 +1,5 @@
+#nullable enable
+CD.Results.AspNetCore.ResultHttpExtensions
+static CD.Results.AspNetCore.ResultHttpExtensions.GetStatusCode(this CD.Results.BaseResult! result, int successStatusCode = 200) -> int
+static CD.Results.AspNetCore.ResultHttpExtensions.ToActionResult(this CD.Results.BaseResult! result, int successStatusCode = 200) -> Microsoft.AspNetCore.Mvc.IActionResult!
+static CD.Results.AspNetCore.ResultHttpExtensions.ToHttpResult(this CD.Results.BaseResult! result, int successStatusCode = 200) -> Microsoft.AspNetCore.Http.IResult!

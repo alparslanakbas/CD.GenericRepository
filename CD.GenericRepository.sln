@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.GenericRepository.Api", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.Results", "src\CD.Results\CD.Results.csproj", "{01BC7FF4-072F-4065-8C51-21ACAB16544B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.Results.AspNetCore", "src\CD.Results.AspNetCore\CD.Results.AspNetCore.csproj", "{92D9BFC3-C134-4A6C-8EB0-41F01BEA3421}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.Generic.Repository", "src\CD.Generic.Repository\CD.Generic.Repository.csproj", "{5A5FE717-BF05-40C6-A289-6B493A81D720}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD.GenericRepository.Tests", "tests\CD.GenericRepository.Tests\CD.GenericRepository.Tests.csproj", "{6CA55965-A5ED-4798-A978-F74085C3F102}"
@@ -36,6 +38,10 @@ Global
 		{01BC7FF4-072F-4065-8C51-21ACAB16544B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01BC7FF4-072F-4065-8C51-21ACAB16544B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01BC7FF4-072F-4065-8C51-21ACAB16544B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D9BFC3-C134-4A6C-8EB0-41F01BEA3421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D9BFC3-C134-4A6C-8EB0-41F01BEA3421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D9BFC3-C134-4A6C-8EB0-41F01BEA3421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D9BFC3-C134-4A6C-8EB0-41F01BEA3421}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A5FE717-BF05-40C6-A289-6B493A81D720}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <PackageId>CD.Generic.Repository</PackageId>
-    <Version>3.0.0</Version>
+    <Version>3.0.0-preview.1</Version>
     <Description>Compatibility package for CD.Generic.Repository 2.x users. Migrate to CD.GenericRepository.</Description>
     <PackageTags>EntityFrameworkCore;Repository;UnitOfWork;Legacy</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>

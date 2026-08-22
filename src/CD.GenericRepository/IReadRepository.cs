@@ -21,6 +21,22 @@ public interface IReadRepository<TEntity>
         bool asTracking = false,
         CancellationToken cancellationToken = default);
 
+    /// <summary>Projects and materializes only the fields required by the caller.</summary>
+    Task<IReadOnlyList<TResult>> ProjectAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>Returns one ordered page projected directly by the database provider.</summary>
+    Task<PagedList<TResult>> PageAsync<TResult, TOrderKey>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, TOrderKey>> orderBy,
+        int pageNumber,
+        int pageSize,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool descending = false,
+        CancellationToken cancellationToken = default);
+
     /// <summary>Determines whether any entity matches the predicate.</summary>
     Task<bool> ExistsAsync(
         Expression<Func<TEntity, bool>> predicate,

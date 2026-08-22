@@ -7,10 +7,10 @@ Version 3 introduces `CD.GenericRepository` as the primary one-reference package
 For a new project, use only:
 
 ```xml
-<PackageReference Include="CD.GenericRepository" Version="3.0.0" />
+<PackageReference Include="CD.GenericRepository" Version="3.0.0-preview.1" />
 ```
 
-This reference brings in `CD.Results` transitively. Existing applications can update `CD.Generic.Repository` to 3.0.0 first; the compatibility package forwards to the new package.
+This reference brings in `CD.Results` transitively. Existing applications can update `CD.Generic.Repository` to `3.0.0-preview.1` first; the compatibility package forwards to the new package.
 
 ## Namespace compatibility
 
@@ -42,6 +42,20 @@ Methods that may not find an entity now correctly return `TEntity?`. Update call
 ## Result changes
 
 - Generic and non-generic results are available.
-- Success requires a 2xx status code; failure requires a non-2xx status code and at least one message.
+- `CD.Results` no longer depends on HTTP semantics. Errors now have a stable `Code`, `Message`, and `ResultErrorType`.
+- Replace `BadRequest(...)` with `Validation(...)` or `Failure(...)`.
+- Replace `Created(data)` with `Success(data)` and choose HTTP 201 at the web boundary.
+- Web APIs can install `CD.Results.AspNetCore` and call `result.ToActionResult()` or `result.ToHttpResult()`.
 - `ToResultAsync` no longer exposes exception messages by default.
-- `OperationCanceledException` is propagated rather than converted into an HTTP 500 result.
+- `OperationCanceledException` is propagated rather than converted into a failed result.
+
+## Registration and transactions
+
+Contexts no longer need to implement `IUnitOfWork` directly:
+
+```csharp
+builder.Services.AddDbContext<AppDbContext>(options => /* provider */);
+builder.Services.AddGenericRepositories<AppDbContext>();
+```
+
+Resolve `IUnitOfWork` for saves or `ITransactionalUnitOfWork` when multiple operations must commit atomically.

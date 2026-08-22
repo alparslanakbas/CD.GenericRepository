@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text.Json.Serialization;
 
 namespace CD.Results;
@@ -6,41 +5,53 @@ namespace CD.Results;
 /// <summary>Represents an operation that does not return a value.</summary>
 public sealed class Result : BaseResult
 {
-    private Result(bool isSuccessful, HttpStatusCode statusCode, IEnumerable<string>? errorMessages = null)
-        : base(isSuccessful, statusCode, errorMessages)
+    private Result(bool isSuccessful, IEnumerable<ResultError>? errors = null)
+        : base(isSuccessful, errors)
     {
     }
 
-    public static Result Success(HttpStatusCode statusCode = HttpStatusCode.OK)
-        => new(true, statusCode);
+    public static Result Success() => new(true);
 
-    public static Result Failure(HttpStatusCode statusCode, string errorMessage)
-        => new(false, statusCode, [errorMessage]);
+    public static Result Failure(string message, string code = "failure")
+        => Failure(new ResultError(code, message));
 
-    public static Result Failure(HttpStatusCode statusCode, IEnumerable<string> errorMessages)
-        => new(false, statusCode, errorMessages);
+    public static Result Failure(ResultError error)
+        => new(false, [error ?? throw new ArgumentNullException(nameof(error))]);
 
-    public static Result NotFound(string message = "Resource not found")
-        => Failure(HttpStatusCode.NotFound, message);
+    public static Result Failure(IEnumerable<ResultError> errors)
+        => new(false, errors ?? throw new ArgumentNullException(nameof(errors)));
 
-    public static Result BadRequest(string message)
-        => Failure(HttpStatusCode.BadRequest, message);
+    public static Result Validation(string message, string code = "validation")
+        => Failure(new ResultError(code, message, ResultErrorType.Validation));
 
-    public static Result Unauthorized(string message = "Unauthorized access")
-        => Failure(HttpStatusCode.Unauthorized, message);
+    public static Result NotFound(string message = "Resource not found", string code = "not_found")
+        => Failure(new ResultError(code, message, ResultErrorType.NotFound));
 
-    public static Result Forbidden(string message = "Forbidden access")
-        => Failure(HttpStatusCode.Forbidden, message);
+    public static Result Unauthorized(string message = "Unauthorized access", string code = "unauthorized")
+        => Failure(new ResultError(code, message, ResultErrorType.Unauthorized));
 
-    public static Result Conflict(string message)
-        => Failure(HttpStatusCode.Conflict, message);
+    public static Result Forbidden(string message = "Forbidden access", string code = "forbidden")
+        => Failure(new ResultError(code, message, ResultErrorType.Forbidden));
+
+    public static Result Conflict(string message, string code = "conflict")
+        => Failure(new ResultError(code, message, ResultErrorType.Conflict));
+
+    public static Result Unexpected(string message = "An unexpected error occurred.", string code = "unexpected")
+        => Failure(new ResultError(code, message, ResultErrorType.Unexpected));
+
+    public TResult Match<TResult>(Func<TResult> onSuccess, Func<IReadOnlyList<ResultError>, TResult> onFailure)
+    {
+        ArgumentNullException.ThrowIfNull(onSuccess);
+        ArgumentNullException.ThrowIfNull(onFailure);
+        return IsSuccessful ? onSuccess() : onFailure(Errors!);
+    }
 }
 
 /// <summary>Represents an operation that returns a value when successful.</summary>
 public sealed class Result<T> : BaseResult
 {
-    private Result(T? data, bool isSuccessful, HttpStatusCode statusCode, IEnumerable<string>? errorMessages = null)
-        : base(isSuccessful, statusCode, errorMessages)
+    private Result(T? data, bool isSuccessful, IEnumerable<ResultError>? errors = null)
+        : base(isSuccessful, errors)
     {
         Data = data;
     }
@@ -48,43 +59,42 @@ public sealed class Result<T> : BaseResult
     [JsonPropertyName("data")]
     public T? Data { get; }
 
-    public static Result<T> Success(T data, HttpStatusCode statusCode = HttpStatusCode.OK)
-        => new(data, true, statusCode);
+    public static Result<T> Success(T data) => new(data, true);
 
-    public static Result<T> Created(T data)
-        => Success(data, HttpStatusCode.Created);
+    public static Result<T> Failure(string message, string code = "failure")
+        => Failure(new ResultError(code, message));
 
-    public static Result<T> Failure(HttpStatusCode statusCode, string errorMessage)
-        => new(default, false, statusCode, [errorMessage]);
+    public static Result<T> Failure(ResultError error)
+        => new(default, false, [error ?? throw new ArgumentNullException(nameof(error))]);
 
-    public static Result<T> Failure(HttpStatusCode statusCode, IEnumerable<string> errorMessages)
-        => new(default, false, statusCode, errorMessages);
+    public static Result<T> Failure(IEnumerable<ResultError> errors)
+        => new(default, false, errors ?? throw new ArgumentNullException(nameof(errors)));
 
-    public static Result<T> NotFound(string message = "Resource not found")
-        => Failure(HttpStatusCode.NotFound, message);
+    public static Result<T> Validation(string message, string code = "validation")
+        => Failure(new ResultError(code, message, ResultErrorType.Validation));
 
-    public static Result<T> BadRequest(string message)
-        => Failure(HttpStatusCode.BadRequest, message);
+    public static Result<T> NotFound(string message = "Resource not found", string code = "not_found")
+        => Failure(new ResultError(code, message, ResultErrorType.NotFound));
 
-    public static Result<T> Unauthorized(string message = "Unauthorized access")
-        => Failure(HttpStatusCode.Unauthorized, message);
+    public static Result<T> Unauthorized(string message = "Unauthorized access", string code = "unauthorized")
+        => Failure(new ResultError(code, message, ResultErrorType.Unauthorized));
 
-    public static Result<T> Forbidden(string message = "Forbidden access")
-        => Failure(HttpStatusCode.Forbidden, message);
+    public static Result<T> Forbidden(string message = "Forbidden access", string code = "forbidden")
+        => Failure(new ResultError(code, message, ResultErrorType.Forbidden));
 
-    public static Result<T> Conflict(string message)
-        => Failure(HttpStatusCode.Conflict, message);
+    public static Result<T> Conflict(string message, string code = "conflict")
+        => Failure(new ResultError(code, message, ResultErrorType.Conflict));
+
+    public static Result<T> Unexpected(string message = "An unexpected error occurred.", string code = "unexpected")
+        => Failure(new ResultError(code, message, ResultErrorType.Unexpected));
 
     public TResult Match<TResult>(
         Func<T?, TResult> onSuccess,
-        Func<IReadOnlyList<string>, TResult> onFailure)
+        Func<IReadOnlyList<ResultError>, TResult> onFailure)
     {
         ArgumentNullException.ThrowIfNull(onSuccess);
         ArgumentNullException.ThrowIfNull(onFailure);
-
-        return IsSuccessful
-            ? onSuccess(Data)
-            : onFailure(ErrorMessages!);
+        return IsSuccessful ? onSuccess(Data) : onFailure(Errors!);
     }
 
     public static implicit operator Result<T>(T data) => Success(data);

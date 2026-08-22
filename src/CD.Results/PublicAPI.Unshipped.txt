@@ -1,0 +1,58 @@
+#nullable enable
+CD.Results.BaseResult
+CD.Results.BaseResult.BaseResult(bool isSuccessful, System.Collections.Generic.IEnumerable<CD.Results.ResultError!>? errors = null) -> void
+CD.Results.BaseResult.ErrorMessages.get -> System.Collections.Generic.IReadOnlyList<string!>?
+CD.Results.BaseResult.Errors.get -> System.Collections.Generic.IReadOnlyList<CD.Results.ResultError!>?
+CD.Results.BaseResult.ErrorType.get -> CD.Results.ResultErrorType?
+CD.Results.BaseResult.IsFailure.get -> bool
+CD.Results.BaseResult.IsSuccessful.get -> bool
+CD.Results.Result
+CD.Results.Result.Match<TResult>(System.Func<TResult>! onSuccess, System.Func<System.Collections.Generic.IReadOnlyList<CD.Results.ResultError!>!, TResult>! onFailure) -> TResult
+CD.Results.Result<T>
+CD.Results.Result<T>.Data.get -> T?
+CD.Results.Result<T>.Match<TResult>(System.Func<T?, TResult>! onSuccess, System.Func<System.Collections.Generic.IReadOnlyList<CD.Results.ResultError!>!, TResult>! onFailure) -> TResult
+CD.Results.ResultError
+CD.Results.ResultError.<Clone>$() -> CD.Results.ResultError!
+CD.Results.ResultError.Code.get -> string!
+CD.Results.ResultError.Equals(CD.Results.ResultError? other) -> bool
+CD.Results.ResultError.Message.get -> string!
+CD.Results.ResultError.ResultError(string! code, string! message, CD.Results.ResultErrorType type = CD.Results.ResultErrorType.Failure) -> void
+CD.Results.ResultError.Type.get -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType
+CD.Results.ResultErrorType.Conflict = 3 -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType.Failure = 0 -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType.Forbidden = 5 -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType.NotFound = 2 -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType.Unauthorized = 4 -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType.Unexpected = 6 -> CD.Results.ResultErrorType
+CD.Results.ResultErrorType.Validation = 1 -> CD.Results.ResultErrorType
+CD.Results.ResultExtensions
+override CD.Results.BaseResult.ToString() -> string!
+override CD.Results.ResultError.Equals(object? obj) -> bool
+override CD.Results.ResultError.GetHashCode() -> int
+override CD.Results.ResultError.ToString() -> string!
+static CD.Results.Result.Conflict(string! message, string! code = "conflict") -> CD.Results.Result!
+static CD.Results.Result.Failure(CD.Results.ResultError! error) -> CD.Results.Result!
+static CD.Results.Result.Failure(string! message, string! code = "failure") -> CD.Results.Result!
+static CD.Results.Result.Failure(System.Collections.Generic.IEnumerable<CD.Results.ResultError!>! errors) -> CD.Results.Result!
+static CD.Results.Result.Forbidden(string! message = "Forbidden access", string! code = "forbidden") -> CD.Results.Result!
+static CD.Results.Result.NotFound(string! message = "Resource not found", string! code = "not_found") -> CD.Results.Result!
+static CD.Results.Result.Success() -> CD.Results.Result!
+static CD.Results.Result.Unauthorized(string! message = "Unauthorized access", string! code = "unauthorized") -> CD.Results.Result!
+static CD.Results.Result.Unexpected(string! message = "An unexpected error occurred.", string! code = "unexpected") -> CD.Results.Result!
+static CD.Results.Result.Validation(string! message, string! code = "validation") -> CD.Results.Result!
+static CD.Results.Result<T>.Conflict(string! message, string! code = "conflict") -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Failure(CD.Results.ResultError! error) -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Failure(string! message, string! code = "failure") -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Failure(System.Collections.Generic.IEnumerable<CD.Results.ResultError!>! errors) -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Forbidden(string! message = "Forbidden access", string! code = "forbidden") -> CD.Results.Result<T>!
+static CD.Results.Result<T>.implicit operator CD.Results.Result<T>!(T data) -> CD.Results.Result<T>!
+static CD.Results.Result<T>.NotFound(string! message = "Resource not found", string! code = "not_found") -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Success(T data) -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Unauthorized(string! message = "Unauthorized access", string! code = "unauthorized") -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Unexpected(string! message = "An unexpected error occurred.", string! code = "unexpected") -> CD.Results.Result<T>!
+static CD.Results.Result<T>.Validation(string! message, string! code = "validation") -> CD.Results.Result<T>!
+static CD.Results.ResultError.operator !=(CD.Results.ResultError? left, CD.Results.ResultError? right) -> bool
+static CD.Results.ResultError.operator ==(CD.Results.ResultError? left, CD.Results.ResultError? right) -> bool
+static CD.Results.ResultExtensions.ToResult<T>(this T value) -> CD.Results.Result<T>!
+static CD.Results.ResultExtensions.ToResultAsync<T>(this System.Threading.Tasks.Task<T>! task, System.Func<System.Exception!, string!>? errorMessageFactory = null) -> System.Threading.Tasks.Task<CD.Results.Result<T>!>!

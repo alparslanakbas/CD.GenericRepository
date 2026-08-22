@@ -7,13 +7,14 @@ Version 3 provides one primary package reference while keeping the Result patter
 | Package | Purpose |
 | --- | --- |
 | `CD.GenericRepository` | Primary package. Includes repository APIs and a dependency on `CD.Results`. |
-| `CD.Results` | Dependency-free Result pattern for projects that do not use EF Core. |
+| `CD.Results` | Transport-independent Result pattern for projects that do not use EF Core. |
+| `CD.Results.AspNetCore` | Optional controller and Minimal API response mappings. |
 | `CD.Generic.Repository` | Compatibility package for users migrating from versions 1.x and 2.x. |
 
 ## Install
 
 ```bash
-dotnet add package CD.GenericRepository
+dotnet add package CD.GenericRepository --prerelease
 ```
 
 That single reference makes both namespaces available:
@@ -31,11 +32,11 @@ using CD.Results;
 
 ## Quick start
 
-Implement `IUnitOfWork` on your context:
+Create your context normally:
 
 ```csharp
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options)
-    : DbContext(options), IUnitOfWork
+    : DbContext(options)
 {
     public DbSet<User> Users => Set<User>();
 }
@@ -56,8 +57,7 @@ Register it with dependency injection:
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 
-builder.Services.AddScoped<IUnitOfWork>(services =>
-    services.GetRequiredService<AppDbContext>());
+builder.Services.AddGenericRepositories<AppDbContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 ```
 
@@ -73,9 +73,19 @@ public async Task<Result<User>> GetByIdAsync(
         cancellationToken: cancellationToken);
 
     return user is null
-        ? Result<User>.NotFound($"User not found with id: {id}")
+        ? Result<User>.NotFound($"User not found with id: {id}", "user.not_found")
         : Result<User>.Success(user);
 }
+```
+
+For Web APIs, add the optional adapter and let it map error types to HTTP:
+
+```bash
+dotnet add package CD.Results.AspNetCore --prerelease
+```
+
+```csharp
+return result.ToActionResult();
 ```
 
 ## Design notes
@@ -84,6 +94,9 @@ public async Task<Result<User>> GetByIdAsync(
 - Repository changes are persisted only when `IUnitOfWork.SaveChangesAsync` is called.
 - Missing entities return `null` or `false`; delete operations do not pass `null` to EF Core.
 - Every async query accepts and forwards a `CancellationToken`.
+- Projection and ordered paging are executed by the database provider.
+- `ITransactionalUnitOfWork` commits successful operations and rolls failures back.
+- Public API contract files make accidental breaking changes fail during CI.
 - The 2.x API remains available as obsolete migration members for one major release.
 
 See [the v3 migration guide](docs/MIGRATION_V3.md) and the [sample API](samples/CD.GenericRepository.Api).

@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here.
 
-## 3.0.0
+## 3.0.0-preview.1
 
 ### Added
 
@@ -10,7 +10,12 @@ All notable changes to this project are documented here.
 - .NET 8, .NET 9 and .NET 10 multi-targeting.
 - `IReadRepository<TEntity>` and explicit `Query`, `GetAsync`, `ListAsync`, `ExistsAsync`, and `CountAsync` APIs.
 - Safe `RemoveByIdAsync` and `RemoveFirstAsync` operations.
-- Non-generic `Result`, `Created`, `Conflict`, and `Match` helpers.
+- Database-side projection and ordered `PagedList<T>` queries.
+- Composite-key deletion through `RemoveByKeyAsync`.
+- `EfUnitOfWork<TContext>`, transaction boundaries, and one-line dependency injection registration.
+- Structured, transport-independent Result errors with stable codes and classifications.
+- Optional `CD.Results.AspNetCore` mappings for controllers and Minimal APIs.
+- Public API compatibility analysis that rejects unreviewed surface changes.
 - SQLite-backed integration tests, CI, package validation, symbols, and automated release workflow.
 
 ### Changed
@@ -19,6 +24,8 @@ All notable changes to this project are documented here.
 - Read operations are no-tracking by default.
 - Cancellation tokens are forwarded by all async queries.
 - Exception details are hidden by `ToResultAsync` unless an explicit mapping function is supplied.
+- HTTP status handling moved out of `CD.Results` and into `CD.Results.AspNetCore`.
+- Release publishing uses short-lived NuGet credentials through trusted publishing.
 
 ### Deprecated
 

@@ -1,0 +1,110 @@
+#nullable enable
+CD.GenericRepository.EfUnitOfWork<TContext>
+CD.GenericRepository.EfUnitOfWork<TContext>.EfUnitOfWork(TContext! context) -> void
+CD.GenericRepository.EfUnitOfWork<TContext>.ExecuteInTransactionAsync(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.EfUnitOfWork<TContext>.ExecuteInTransactionWithResultAsync<TResult>(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<TResult>!>! operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
+CD.GenericRepository.EfUnitOfWork<TContext>.SaveChanges() -> int
+CD.GenericRepository.EfUnitOfWork<TContext>.SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<int>!
+CD.GenericRepository.IReadRepository<TEntity>
+CD.GenericRepository.IReadRepository<TEntity>.CountAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<int>!
+CD.GenericRepository.IReadRepository<TEntity>.ExistsAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! predicate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.IReadRepository<TEntity>.GetAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! predicate, bool asTracking = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.IReadRepository<TEntity>.ListAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, bool asTracking = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<TEntity!>!>!
+CD.GenericRepository.IReadRepository<TEntity>.PageAsync<TResult, TOrderKey>(System.Linq.Expressions.Expression<System.Func<TEntity!, TResult>!>! selector, System.Linq.Expressions.Expression<System.Func<TEntity!, TOrderKey>!>! orderBy, int pageNumber, int pageSize, System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, bool descending = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<CD.GenericRepository.PagedList<TResult>!>!
+CD.GenericRepository.IReadRepository<TEntity>.ProjectAsync<TResult>(System.Linq.Expressions.Expression<System.Func<TEntity!, TResult>!>! selector, System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<TResult>!>!
+CD.GenericRepository.IReadRepository<TEntity>.Query(bool asTracking = false) -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.IRepository<TEntity>
+CD.GenericRepository.IRepository<TEntity>.Add(TEntity! entity) -> void
+CD.GenericRepository.IRepository<TEntity>.AddAsync(TEntity! entity, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.IRepository<TEntity>.AddRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.IRepository<TEntity>.AddRangeAsync(System.Collections.Generic.IEnumerable<TEntity!>! entities, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.IRepository<TEntity>.Any(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> bool
+CD.GenericRepository.IRepository<TEntity>.AnyAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.IRepository<TEntity>.CountBy(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Linq.IQueryable<System.Collections.Generic.KeyValuePair<bool, int>>!
+CD.GenericRepository.IRepository<TEntity>.Delete(TEntity! entity) -> void
+CD.GenericRepository.IRepository<TEntity>.DeleteByExpressionAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.IRepository<TEntity>.DeleteByIdAsync<TKey>(TKey id) -> System.Threading.Tasks.Task!
+CD.GenericRepository.IRepository<TEntity>.DeleteRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.IRepository<TEntity>.First(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, bool isTrackingActive = true) -> TEntity!
+CD.GenericRepository.IRepository<TEntity>.FirstAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, bool isTrackingActive = true, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity!>!
+CD.GenericRepository.IRepository<TEntity>.FirstOrDefault(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, bool isTrackingActive = true) -> TEntity?
+CD.GenericRepository.IRepository<TEntity>.FirstOrDefaultAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), bool isTrackingActive = true) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.IRepository<TEntity>.GetAll() -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.IRepository<TEntity>.GetAllWithTracking() -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.IRepository<TEntity>.GetByExpression(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> TEntity?
+CD.GenericRepository.IRepository<TEntity>.GetByExpressionAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.IRepository<TEntity>.GetByExpressionWithTracking(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> TEntity?
+CD.GenericRepository.IRepository<TEntity>.GetByExpressionWithTrackingAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.IRepository<TEntity>.GetFirst() -> TEntity?
+CD.GenericRepository.IRepository<TEntity>.GetFirstAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.IRepository<TEntity>.Remove(TEntity! entity) -> void
+CD.GenericRepository.IRepository<TEntity>.RemoveByIdAsync<TKey>(TKey id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.IRepository<TEntity>.RemoveByKeyAsync(System.Collections.Generic.IReadOnlyList<object!>! keyValues, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.IRepository<TEntity>.RemoveFirstAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! predicate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.IRepository<TEntity>.RemoveRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.IRepository<TEntity>.Update(TEntity! entity) -> void
+CD.GenericRepository.IRepository<TEntity>.UpdateRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.IRepository<TEntity>.Where(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.IRepository<TEntity>.WhereWithTracking(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.ITransactionalUnitOfWork
+CD.GenericRepository.ITransactionalUnitOfWork.ExecuteInTransactionAsync(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.ITransactionalUnitOfWork.ExecuteInTransactionWithResultAsync<TResult>(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<TResult>!>! operation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
+CD.GenericRepository.IUnitOfWork
+CD.GenericRepository.IUnitOfWork.SaveChanges() -> int
+CD.GenericRepository.IUnitOfWork.SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<int>!
+CD.GenericRepository.PagedList<T>
+CD.GenericRepository.PagedList<T>.HasNextPage.get -> bool
+CD.GenericRepository.PagedList<T>.HasPreviousPage.get -> bool
+CD.GenericRepository.PagedList<T>.Items.get -> System.Collections.Generic.IReadOnlyList<T>!
+CD.GenericRepository.PagedList<T>.PagedList(System.Collections.Generic.IReadOnlyList<T>! items, int pageNumber, int pageSize, int totalCount) -> void
+CD.GenericRepository.PagedList<T>.PageNumber.get -> int
+CD.GenericRepository.PagedList<T>.PageSize.get -> int
+CD.GenericRepository.PagedList<T>.TotalCount.get -> int
+CD.GenericRepository.PagedList<T>.TotalPages.get -> int
+CD.GenericRepository.Repository<TEntity, TContext>
+CD.GenericRepository.Repository<TEntity, TContext>.Repository(TContext! context) -> void
+CD.GenericRepository.Repository<TEntity, TContext>.TypedContext.get -> TContext!
+CD.GenericRepository.Repository<TEntity>
+CD.GenericRepository.Repository<TEntity>.Add(TEntity! entity) -> void
+CD.GenericRepository.Repository<TEntity>.AddAsync(TEntity! entity, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.Repository<TEntity>.AddRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.Repository<TEntity>.AddRangeAsync(System.Collections.Generic.IEnumerable<TEntity!>! entities, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.Repository<TEntity>.Any(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> bool
+CD.GenericRepository.Repository<TEntity>.AnyAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.Repository<TEntity>.Context.get -> Microsoft.EntityFrameworkCore.DbContext!
+CD.GenericRepository.Repository<TEntity>.CountAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<int>!
+CD.GenericRepository.Repository<TEntity>.CountBy(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Linq.IQueryable<System.Collections.Generic.KeyValuePair<bool, int>>!
+CD.GenericRepository.Repository<TEntity>.Delete(TEntity! entity) -> void
+CD.GenericRepository.Repository<TEntity>.DeleteByExpressionAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+CD.GenericRepository.Repository<TEntity>.DeleteByIdAsync<TKey>(TKey id) -> System.Threading.Tasks.Task!
+CD.GenericRepository.Repository<TEntity>.DeleteRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.Repository<TEntity>.ExistsAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! predicate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.Repository<TEntity>.First(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, bool isTrackingActive = true) -> TEntity!
+CD.GenericRepository.Repository<TEntity>.FirstAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, bool isTrackingActive = true, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity!>!
+CD.GenericRepository.Repository<TEntity>.FirstOrDefault(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, bool isTrackingActive = true) -> TEntity?
+CD.GenericRepository.Repository<TEntity>.FirstOrDefaultAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), bool isTrackingActive = true) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.Repository<TEntity>.GetAll() -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.Repository<TEntity>.GetAllWithTracking() -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.Repository<TEntity>.GetAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! predicate, bool asTracking = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.Repository<TEntity>.GetByExpression(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> TEntity?
+CD.GenericRepository.Repository<TEntity>.GetByExpressionAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.Repository<TEntity>.GetByExpressionWithTracking(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> TEntity?
+CD.GenericRepository.Repository<TEntity>.GetByExpressionWithTrackingAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.Repository<TEntity>.GetFirst() -> TEntity?
+CD.GenericRepository.Repository<TEntity>.GetFirstAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TEntity?>!
+CD.GenericRepository.Repository<TEntity>.ListAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, bool asTracking = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<TEntity!>!>!
+CD.GenericRepository.Repository<TEntity>.PageAsync<TResult, TOrderKey>(System.Linq.Expressions.Expression<System.Func<TEntity!, TResult>!>! selector, System.Linq.Expressions.Expression<System.Func<TEntity!, TOrderKey>!>! orderBy, int pageNumber, int pageSize, System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, bool descending = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<CD.GenericRepository.PagedList<TResult>!>!
+CD.GenericRepository.Repository<TEntity>.ProjectAsync<TResult>(System.Linq.Expressions.Expression<System.Func<TEntity!, TResult>!>! selector, System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>? predicate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<TResult>!>!
+CD.GenericRepository.Repository<TEntity>.Query(bool asTracking = false) -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.Repository<TEntity>.Remove(TEntity! entity) -> void
+CD.GenericRepository.Repository<TEntity>.RemoveByIdAsync<TKey>(TKey id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.Repository<TEntity>.RemoveByKeyAsync(System.Collections.Generic.IReadOnlyList<object!>! keyValues, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.Repository<TEntity>.RemoveFirstAsync(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! predicate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+CD.GenericRepository.Repository<TEntity>.RemoveRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.Repository<TEntity>.Repository(Microsoft.EntityFrameworkCore.DbContext! context) -> void
+CD.GenericRepository.Repository<TEntity>.Update(TEntity! entity) -> void
+CD.GenericRepository.Repository<TEntity>.UpdateRange(System.Collections.Generic.IEnumerable<TEntity!>! entities) -> void
+CD.GenericRepository.Repository<TEntity>.Where(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.Repository<TEntity>.WhereWithTracking(System.Linq.Expressions.Expression<System.Func<TEntity!, bool>!>! expression) -> System.Linq.IQueryable<TEntity!>!
+CD.GenericRepository.ServiceCollectionExtensions
+static CD.GenericRepository.ServiceCollectionExtensions.AddGenericRepositories<TContext>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!

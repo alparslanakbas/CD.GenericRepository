@@ -1,5 +1,3 @@
-using System.Net;
-
 namespace CD.Results;
 
 public static class ResultExtensions
@@ -30,7 +28,7 @@ public static class ResultExtensions
             string message = errorMessageFactory?.Invoke(exception)
                 ?? "An unexpected error occurred.";
 
-            return Result<T>.Failure(HttpStatusCode.InternalServerError, message);
+            return Result<T>.Unexpected(message);
         }
     }
 }

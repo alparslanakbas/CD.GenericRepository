@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -7,34 +6,29 @@ namespace CD.Results;
 /// <summary>Contains the shared state of generic and non-generic results.</summary>
 public abstract class BaseResult
 {
-    protected BaseResult(
-        bool isSuccessful,
-        HttpStatusCode statusCode,
-        IEnumerable<string>? errorMessages = null)
+    protected BaseResult(bool isSuccessful, IEnumerable<ResultError>? errors = null)
     {
-        bool isSuccessStatusCode = (int)statusCode is >= 200 and <= 299;
-
-        if (isSuccessful != isSuccessStatusCode)
-        {
-            throw new ArgumentException(
-                "Successful results require a 2xx status code and failures require a non-2xx status code.",
-                nameof(statusCode));
-        }
-
-        string[] errors = errorMessages?
-            .Where(message => !string.IsNullOrWhiteSpace(message))
-            .Select(message => message.Trim())
-            .Distinct(StringComparer.Ordinal)
+        ResultError[] normalizedErrors = errors?
+            .Distinct()
             .ToArray() ?? [];
 
-        if (!isSuccessful && errors.Length == 0)
+        if (isSuccessful && normalizedErrors.Length > 0)
         {
-            throw new ArgumentException("A failed result requires at least one error message.", nameof(errorMessages));
+            throw new ArgumentException("A successful result cannot contain errors.", nameof(errors));
+        }
+
+        if (!isSuccessful && normalizedErrors.Length == 0)
+        {
+            throw new ArgumentException("A failed result requires at least one error.", nameof(errors));
+        }
+
+        if (normalizedErrors.Select(error => error.Type).Distinct().Skip(1).Any())
+        {
+            throw new ArgumentException("All errors in a result must have the same type.", nameof(errors));
         }
 
         IsSuccessful = isSuccessful;
-        StatusCode = statusCode;
-        ErrorMessages = errors.Length == 0 ? null : errors;
+        Errors = normalizedErrors.Length == 0 ? null : normalizedErrors;
     }
 
     [JsonPropertyName("isSuccessful")]
@@ -43,12 +37,19 @@ public abstract class BaseResult
     [JsonIgnore]
     public bool IsFailure => !IsSuccessful;
 
-    [JsonPropertyName("statusCode")]
-    public HttpStatusCode StatusCode { get; }
-
-    [JsonPropertyName("errorMessages")]
+    [JsonPropertyName("errors")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public IReadOnlyList<string>? ErrorMessages { get; }
+    public IReadOnlyList<ResultError>? Errors { get; }
+
+    [JsonIgnore]
+    public ResultErrorType? ErrorType => Errors?[0].Type;
+
+    /// <summary>Provides the message-only view used by versions 1 and 2.</summary>
+    [Obsolete("Use Errors to access structured error codes, messages, and types.")]
+    [JsonIgnore]
+    public IReadOnlyList<string>? ErrorMessages => Errors?
+        .Select(error => error.Message)
+        .ToArray();
 
     public override string ToString()
         => JsonSerializer.Serialize(this, GetType(), JsonOptions);
